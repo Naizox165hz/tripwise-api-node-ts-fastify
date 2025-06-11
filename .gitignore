@@ -1,0 +1,12 @@
+/src/generated/prisma
+# Dependências
+/node_modules
+
+# Prisma
+/prisma/generated
+*.db-journal
+*.sqlite
+
+# Ambiente
+.env
+.env.*
