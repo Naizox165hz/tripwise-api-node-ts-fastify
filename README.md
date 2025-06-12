@@ -32,6 +32,10 @@ A RESTful API for managing trips and participants, built with **Node.js**, **Typ
 ## How to Run
 
 #### 1. Clone the repository  
+```bash
+git clone https://github.com/Gustavo-Zamai/tripwise-api-node-ts-fastify.git
+cd tripwise-api-node-ts-fastify
+```
 #### 2. Install dependencies:  
 ```bash
    npm install
